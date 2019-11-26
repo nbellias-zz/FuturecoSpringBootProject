@@ -6,10 +6,13 @@
 package gr.cognity.futureco.controllers;
 
 import gr.cognity.futureco.repositories.UserRepository;
+import gr.cognity.futureco.services.UserService;
 import java.util.Arrays;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
+import models.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -29,13 +33,13 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+    @Autowired
+    private UserService userService;
     
-    @GetMapping()
-    public List<Object> list() {
-        UserRepository users;
-        
-        String [] strs = {"Tasos", "Maria"};
-        return Arrays.asList(strs);
+    @GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+    public List<User> list() {
+        System.out.println(userService.getAllUsers().size());
+        return userService.getAllUsers();
     }
     
     @GetMapping("/{id}")
@@ -69,6 +73,10 @@ public class UserController {
     }
     
 }
+
+
+
+
 
 
 

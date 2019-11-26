@@ -5,9 +5,7 @@
  */
 package models;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -19,7 +17,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class User {
     
     @Id
-    private int id;
+    private ObjectId _id;
+    private Integer id;
     private String name;
     private String userName;
     private String passWord;
@@ -27,18 +26,27 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String userName, String passWord) {
+    public User(ObjectId _id, Integer id, String name, String userName, String passWord) {
+        this._id = _id;
         this.id = id;
         this.name = name;
         this.userName = userName;
         this.passWord = passWord;
     }
 
-    public int getId() {
+    public ObjectId get_id() {
+        return _id;
+    }
+
+    public void setId(ObjectId _id) {
+        this._id = _id;
+    }
+    
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -74,6 +82,10 @@ public class User {
     
     
 }
+
+
+
+
 
 
 

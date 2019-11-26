@@ -5,10 +5,10 @@
  */
 package gr.cognity.futureco.services;
 
-import gr.cognity.futureco.repositories.UserRepository;
+import gr.cognity.futureco.repositories.OrderRepository;
 import java.util.List;
 import java.util.Optional;
-import models.User;
+import models.Order;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,28 +18,19 @@ import org.springframework.stereotype.Service;
  * @author nmpellias
  */
 @Service
-public class UserService {
-    
+public class OrderService {
     @Autowired
-    private UserRepository repository;
+    private OrderRepository orderRepository;
     
-    public List<User> getAllUsers(){
-        System.out.println(repository.findAll().size());
-        return repository.findAll();
+    public List<Order> getAll(){
+        return orderRepository.findAll();
     }
     
-    public Optional<User> getUser(ObjectId id){
-        return repository.findById(id);
+    public Optional<Order> get(ObjectId cust_id){
+        return orderRepository.findById(cust_id);
     }
-    
-    public User save(User user){
-        return repository.save(user);
-    }
-    
     
 }
-
-
 
 
 

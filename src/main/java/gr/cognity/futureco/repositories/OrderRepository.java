@@ -5,7 +5,7 @@
  */
 package gr.cognity.futureco.repositories;
 
-import models.User;
+import models.Order;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -13,10 +13,9 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  *
  * @author nmpellias
  */
-public interface UserRepository extends MongoRepository<User, ObjectId> {
+    public interface OrderRepository extends MongoRepository<Order, ObjectId> {
     
 }
-
 
 
 
