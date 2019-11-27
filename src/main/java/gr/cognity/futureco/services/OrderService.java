@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
+    // @Autowired
+    // private OrderRepositoryCustom orderR
     
     public List<Order> getAll(){
         return orderRepository.findAll();
@@ -29,8 +31,15 @@ public class OrderService {
     public Optional<Order> get(ObjectId cust_id){
         return orderRepository.findById(cust_id);
     }
-    
+ 
+    public Object fetchSumOfStatusADocs(){
+        return orderRepository.fetchSumOfStatusADocs();
+    }
 }
+
+
+
+
 
 
 

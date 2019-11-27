@@ -7,15 +7,15 @@ package gr.cognity.futureco.repositories;
 
 import java.util.List;
 import models.Order;
-import org.bson.types.ObjectId;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**
  *
  * @author nmpellias
  */
-public interface OrderRepository extends MongoRepository<Order, ObjectId>, OrderRepositoryCustom {
+public interface OrderRepositoryCustom {
+    public Object fetchSumOfStatusADocs();
 }
+
 
 
 

@@ -5,13 +5,12 @@
  */
 package gr.cognity.futureco.controllers;
 
-import gr.cognity.futureco.repositories.UserRepository;
-import gr.cognity.futureco.services.UserService;
-import java.util.Arrays;
+import gr.cognity.futureco.services.OrderService;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
-import models.User;
+import models.Order;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,9 +20,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
@@ -31,29 +28,26 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  * @author nmpellias
  */
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/orders")
+public class OrderController {
+    
     @Autowired
-    private UserService userService;
+    private OrderService orderService;
     
     @GetMapping()
-    public List<User> list() {
-        System.out.println(userService.getAllUsers().size());
-        return userService.getAllUsers();
+    public Object list() {
+        return orderService.fetchSumOfStatusADocs();
     }
     
     @GetMapping("/{id}")
-    public Object get(@PathVariable String id) {
-        return null;
+    public Order get(@PathVariable String id) {
+        ObjectId hid = new ObjectId(id);
+        System.out.println(hid);
+        return (orderService.get(hid).isPresent())?orderService.get(hid).get():null;
     }
     
     @PutMapping("/{id}")
     public ResponseEntity<?> put(@PathVariable String id, @RequestBody Object input) {
-        return null;
-    }
-    
-    @PatchMapping("/id")
-    public ResponseEntity<?> patch(@PathVariable String id, @RequestBody Object input) {
         return null;
     }
     
@@ -73,10 +67,6 @@ public class UserController {
     }
     
 }
-
-
-
-
 
 
 
